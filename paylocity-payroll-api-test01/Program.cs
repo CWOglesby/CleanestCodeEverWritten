@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using paylocity_payroll_api_test01.DataAccess;
+using paylocity_payroll_api_test01.DataAccess.Repository;
 
 namespace paylocity_payroll_api_test01
 {
@@ -13,6 +14,8 @@ namespace paylocity_payroll_api_test01
             var payrollDbConnection = builder.Configuration["ConnectionStrings:PayrollDatabase"];
             builder.Services.AddDbContext<PayrollDbContext>(options =>
                 options.UseSqlServer(payrollDbConnection));
+
+            builder.Services.AddScoped<PayRunRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

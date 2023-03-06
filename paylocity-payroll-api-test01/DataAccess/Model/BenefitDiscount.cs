@@ -1,4 +1,5 @@
-﻿using System;
+﻿using paylocity_payroll_api_test01.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace paylocity_payroll_api_test01.DataAccess.Model;
@@ -13,7 +14,7 @@ public partial class BenefitDiscount
 
     public string FilterPattern { get; set; } = null!;
 
-    public byte DiscountType { get; set; }
+    public BenefitDiscountType DiscountType { get; set; }
 
     public decimal DiscountAmount { get; set; }
 

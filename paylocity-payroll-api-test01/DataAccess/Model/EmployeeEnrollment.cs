@@ -1,4 +1,5 @@
-﻿using System;
+﻿using paylocity_payroll_api_test01.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace paylocity_payroll_api_test01.DataAccess.Model;
@@ -9,7 +10,7 @@ public partial class EmployeeEnrollment
 
     public long EmployeeId { get; set; }
 
-    public byte EnrollmentEventType { get; set; }
+    public EnrollmentEventType EnrollmentEventType { get; set; }
 
     public DateTime EffectiveDate { get; set; }
 

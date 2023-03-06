@@ -1,4 +1,5 @@
-﻿using System;
+﻿using paylocity_payroll_api_test01.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace paylocity_payroll_api_test01.DataAccess.Model;
@@ -11,7 +12,7 @@ public partial class EmployeePosition
 
     public long PositionId { get; set; }
 
-    public byte PayFrequency { get; set; }
+    public PayFrequency PayFrequency { get; set; }
 
     public decimal PayRate { get; set; }
 

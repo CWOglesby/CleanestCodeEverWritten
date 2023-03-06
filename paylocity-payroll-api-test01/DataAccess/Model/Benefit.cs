@@ -1,4 +1,5 @@
-﻿using System;
+﻿using paylocity_payroll_api_test01.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace paylocity_payroll_api_test01.DataAccess.Model;
@@ -9,7 +10,7 @@ public partial class Benefit
 
     public long CompanyId { get; set; }
 
-    public byte BenefitType { get; set; }
+    public BenefitType BenefitType { get; set; }
 
     public string Description { get; set; } = null!;
 

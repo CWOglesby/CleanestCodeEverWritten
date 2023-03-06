@@ -1,4 +1,5 @@
-﻿using System;
+﻿using paylocity_payroll_api_test01.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace paylocity_payroll_api_test01.DataAccess.Model;
@@ -9,7 +10,7 @@ public partial class PayRunDetail
 
     public long PayRunEmployeeId { get; set; }
 
-    public byte PayRunDetailType { get; set; }
+    public PayRunDetailType PayRunDetailType { get; set; }
 
     public decimal Amount { get; set; }
 
