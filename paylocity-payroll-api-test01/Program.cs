@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using paylocity_payroll_api_test01.DataAccess;
 using paylocity_payroll_api_test01.DataAccess.Repository;
+using paylocity_payroll_api_test01.Services.Payroll;
 
 namespace paylocity_payroll_api_test01
 {
@@ -15,6 +16,7 @@ namespace paylocity_payroll_api_test01
             builder.Services.AddDbContext<PayrollDbContext>(options =>
                 options.UseSqlServer(payrollDbConnection));
 
+            builder.Services.AddScoped<CalculatePayrollService>();
             builder.Services.AddScoped<PayRunRepository>();
 
             builder.Services.AddControllers();
