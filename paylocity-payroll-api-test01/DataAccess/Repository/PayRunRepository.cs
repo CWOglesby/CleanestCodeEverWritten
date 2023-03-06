@@ -1,4 +1,5 @@
-﻿using paylocity_payroll_api_test01.DataAccess.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using paylocity_payroll_api_test01.DataAccess.Model;
 using paylocity_payroll_api_test01.Model;
 using System.ComponentModel.Design;
 
@@ -44,25 +45,27 @@ namespace paylocity_payroll_api_test01.DataAccess.Repository
             if (payRun == null)
                 return new PayRunContextDto();
 
+            payRun.EarningsTotal = 0m;
+            payRun.DeductionsTotal = 0m;
+            payRun.WithholdingsTotal = 0m;
+            payRun.NetTotal = 0m;
+
             var payRunContext = new PayRunContextDto
             {
-                PayRun = new PayRun()
-                {
-                    PayRunId = payRun.PayRunId,
-                    CompanyId = payRun.CompanyId,
-                    PayPeriodFrom = payRun.PayPeriodFrom,
-                    PayPeriodTo = payRun.PayPeriodTo,
-                    PayDate = payRun.PayDate,
-                    PayRunType = payRun.PayRunType,
-                    PayRunStatus = Enums.PayRunStatus.Calculating
-                },
-
+                PayRun = payRun,
                 PayRunEmployees = _dbContext.Employees
-                    .Where(ee => ee.CompanyId == payRun.CompanyId)
-                    .Select(ee => new PayRunEmployee()
+                    .Include(e => e.EmployeePositions)
+                    .Include(e => e.EmployeeEnrollments)
+                        .ThenInclude(ee => ee.EnrollmentBenefits)
+                        .ThenInclude(eb => eb.Benefit)
+                    .Include(e => e.EmployeeEnrollments)
+                        .ThenInclude(ee => ee.EnrollmentDependents)
+                    .Where(e => e.CompanyId == payRun.CompanyId)
+                    .Select(e => new PayRunEmployee()
                     {
                         PayRunId = payRun.PayRunId,
-                        EmployeeId = ee.EmployeeId
+                        EmployeeId = e.EmployeeId,
+                        Employee = e
                     }).ToList()
             };
 

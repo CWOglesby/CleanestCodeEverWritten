@@ -1,6 +1,6 @@
 ﻿namespace paylocity_payroll_api_test01.Enums
 {
-    public enum BenefitType
+    public enum BenefitType : byte
     {
         None = 0,
         HealthInsurance = 1,

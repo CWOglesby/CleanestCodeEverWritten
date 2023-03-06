@@ -1,6 +1,6 @@
 ﻿namespace paylocity_payroll_api_test01.Enums
 {
-    public enum PayRunDetailType
+    public enum PayRunDetailType : byte
     {
         None = 0,
         Earning = 1,

@@ -1,6 +1,6 @@
 ﻿namespace paylocity_payroll_api_test01.Enums
 {
-    public enum PayFrequency
+    public enum PayFrequency : byte
     {
         None = 0,
         Daily = 1,

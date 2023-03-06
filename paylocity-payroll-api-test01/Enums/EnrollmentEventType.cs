@@ -1,6 +1,6 @@
 ﻿namespace paylocity_payroll_api_test01.Enums
 {
-    public enum EnrollmentEventType
+    public enum EnrollmentEventType : byte
     {
         None = 0,
         NewHire = 1,

@@ -2,6 +2,7 @@
 using paylocity_payroll_api_test01.DataAccess.Repository;
 using paylocity_payroll_api_test01.Enums;
 using System.Diagnostics.Tracing;
+using System.Text.RegularExpressions;
 
 namespace paylocity_payroll_api_test01.Services.Payroll
 {
@@ -60,7 +61,7 @@ namespace paylocity_payroll_api_test01.Services.Payroll
             {
                 new PayRunDetail()
                 {
-                    Amount = payRunEmp.Employee.EmployeePositions.FirstOrDefault()?.PayRate ?? 2000.00m,
+                    Amount = payRunEmp.Employee.EmployeePositions.FirstOrDefault()?.PayRate ?? 0m,
                     PayRunDetailType = PayRunDetailType.Earning,
                     PayRunEmployeeId = payRunEmp.PayRunEmployeeId
                 }
@@ -107,7 +108,7 @@ namespace paylocity_payroll_api_test01.Services.Payroll
                 .EnrollmentBenefits.FirstOrDefault()?
                 .Benefit.BenefitId ?? 0;
 
-            // Hardcoded proof of concept for applying discounts to employee attributes.
+            // Hardcoded proof of concept for applying discounts to arbitrary employee attributes.
             // This is probably the most interesting design choice in here, and (maybe) not as over-engineered as it looks.
             // The idea would be to allow a benefits admin to create data-driven discounts that don't require engineers to maintain.
             // The use of RegEx is just a placeholder for what might be replaced by something like a visual programming UI.
@@ -123,32 +124,51 @@ namespace paylocity_payroll_api_test01.Services.Payroll
                     FilterByColumn = "Employee.FirstName",
                     FilterPattern = "^[aA].*$"
                 },
-                new BenefitDiscount()
-                {
-                    BenefitId = 0,
-                    DiscountType = BenefitDiscountType.Percentage,
-                    DiscountAmount = 0.10m,
-                    FilterByColumn = "Employee.EmployeeEnrollments.EnrollmentDependents.FirstName",
-                    FilterPattern = "^[aA].*$"
-                }
-            };
 
-            var test1 = GetPropertyValue(payRunEmp, discountsToApply[0].FilterByColumn);
-            var test2 = GetPropertyValue(payRunEmp, discountsToApply[1].FilterByColumn);
+                // TODO: Fix GetPropertyValue() for ICollection properties.
+
+                //new BenefitDiscount()
+                //{
+                //    BenefitId = 0,
+                //    DiscountType = BenefitDiscountType.Percentage,
+                //    DiscountAmount = 0.10m,
+                //    FilterByColumn = "Employee.EmployeeEnrollments.EnrollmentDependents.FirstName",
+                //    FilterPattern = "^[aA].*$"
+                //}
+            };
 
             var employeeCostBase = payRunEmp.Employee
                 .EmployeeEnrollments.FirstOrDefault()?
                 .EnrollmentBenefits.FirstOrDefault(eb => eb.BenefitId == benefitId)?
                 .Benefit.AnnualCostEmployee ?? 0m;
 
-            var employeeCostFinal = 0m;
+            var employeeCostFinal = employeeCostBase;
 
+            foreach (var discount in discountsToApply)
+            {
+                var propertyValue = GetPropertyValue(payRunEmp, discount.FilterByColumn);
+                var regex = new Regex(discount.FilterPattern);
+                if (regex.IsMatch((string)propertyValue))
+                {
+                    employeeCostFinal -= (employeeCostBase * discount.DiscountAmount);
+                }
+            }
+
+            // Discount not working for dependents yet. Hard-coded this since I'm way over time. Disappointing.
             var dependentCostBase = payRunEmp.Employee
                 .EmployeeEnrollments.FirstOrDefault()?
                 .EnrollmentBenefits.FirstOrDefault(eb => eb.BenefitId == benefitId)?
                 .Benefit.AnnualCostDependent ?? 0m;
 
-            return 0m;
+            var dependents = (payRunEmp.Employee
+                .EmployeeEnrollments.FirstOrDefault()?
+                .EnrollmentDependents ?? new List<EnrollmentDependent>())
+                .Select(dep => new { FirstName = dep.FirstName, LastName = dep.LastName, Cost = dependentCostBase })
+                .ToList();
+
+            var dependentCostFinal = dependents.Sum(dep => dep.Cost);
+
+            return (employeeCostFinal + dependentCostFinal) / 26;
         }
 
         public static object GetPropertyValue(object obj, string propertyName)

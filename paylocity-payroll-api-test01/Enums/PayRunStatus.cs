@@ -1,6 +1,6 @@
 ﻿namespace paylocity_payroll_api_test01.Enums
 {
-    public enum PayRunStatus
+    public enum PayRunStatus : byte
     {
         Created = 0,
         Calculating = 1,
