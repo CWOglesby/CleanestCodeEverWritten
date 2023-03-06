@@ -1,7 +1,7 @@
-﻿using paylocity_payroll_api_test01.DataAccess.Model;
-using paylocity_payroll_api_test01.Enums;
+﻿using PaylocityPayrollApi.DataAccess.Model;
+using PaylocityPayrollApi.Enums;
 
-namespace paylocity_payroll_api_test01.Model
+namespace PaylocityPayrollApi.Model
 {
     public class PayRunContextDto
     {

@@ -1,8 +1,8 @@
-﻿using paylocity_payroll_api_test01.Enums;
+﻿using PaylocityPayrollApi.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace paylocity_payroll_api_test01.DataAccess.Model;
+namespace PaylocityPayrollApi.DataAccess.Model;
 
 public partial class BenefitDiscount
 {

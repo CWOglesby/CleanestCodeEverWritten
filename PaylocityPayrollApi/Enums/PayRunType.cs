@@ -1,4 +1,4 @@
-﻿namespace paylocity_payroll_api_test01.Enums
+﻿namespace PaylocityPayrollApi.Enums
 {
     public enum PayRunType : byte
     {

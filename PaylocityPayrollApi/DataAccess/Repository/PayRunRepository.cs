@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using paylocity_payroll_api_test01.DataAccess.Model;
-using paylocity_payroll_api_test01.Model;
+using PaylocityPayrollApi.DataAccess.Model;
+using PaylocityPayrollApi.Model;
 using System.ComponentModel.Design;
 
-namespace paylocity_payroll_api_test01.DataAccess.Repository
+namespace PaylocityPayrollApi.DataAccess.Repository
 {
     public class PayRunRepository
     {

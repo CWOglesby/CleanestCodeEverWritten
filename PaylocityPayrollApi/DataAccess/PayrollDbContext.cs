@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using paylocity_payroll_api_test01.DataAccess.Model;
+using PaylocityPayrollApi.DataAccess.Model;
 
-namespace paylocity_payroll_api_test01.DataAccess;
+namespace PaylocityPayrollApi.DataAccess;
 
 public partial class PayrollDbContext : DbContext
 {

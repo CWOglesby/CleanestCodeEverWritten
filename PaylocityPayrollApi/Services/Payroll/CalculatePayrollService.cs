@@ -1,10 +1,10 @@
-﻿using paylocity_payroll_api_test01.DataAccess.Model;
-using paylocity_payroll_api_test01.DataAccess.Repository;
-using paylocity_payroll_api_test01.Enums;
+﻿using PaylocityPayrollApi.DataAccess.Model;
+using PaylocityPayrollApi.DataAccess.Repository;
+using PaylocityPayrollApi.Enums;
 using System.Diagnostics.Tracing;
 using System.Text.RegularExpressions;
 
-namespace paylocity_payroll_api_test01.Services.Payroll
+namespace PaylocityPayrollApi.Services.Payroll
 {
     public class CalculatePayrollService
     {

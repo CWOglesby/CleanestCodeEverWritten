@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using paylocity_payroll_api_test01.Services.Payroll;
+using PaylocityPayrollApi.Services.Payroll;
 
-namespace paylocity_payroll_api_test01.Controllers
+namespace PaylocityPayrollApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

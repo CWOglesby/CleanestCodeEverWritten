@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using paylocity_payroll_api_test01.DataAccess.Model;
+using PaylocityPayrollApi.DataAccess.Model;
 
-namespace paylocity_payroll_api_test01.Controllers
+namespace PaylocityPayrollApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

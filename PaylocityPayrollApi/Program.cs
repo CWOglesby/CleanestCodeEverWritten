@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using paylocity_payroll_api_test01.DataAccess;
-using paylocity_payroll_api_test01.DataAccess.Repository;
-using paylocity_payroll_api_test01.Services.Payroll;
+using PaylocityPayrollApi.DataAccess;
+using PaylocityPayrollApi.DataAccess.Repository;
+using PaylocityPayrollApi.Services.Payroll;
 
-namespace paylocity_payroll_api_test01
+namespace PaylocityPayrollApi
 {
     public class Program
     {

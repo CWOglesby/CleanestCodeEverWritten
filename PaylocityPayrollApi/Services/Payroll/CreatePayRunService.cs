@@ -1,7 +1,7 @@
-﻿using paylocity_payroll_api_test01.DataAccess;
-using paylocity_payroll_api_test01.DataAccess.Repository;
+﻿using PaylocityPayrollApi.DataAccess;
+using PaylocityPayrollApi.DataAccess.Repository;
 
-namespace paylocity_payroll_api_test01.Services.Payroll
+namespace PaylocityPayrollApi.Services.Payroll
 {
     public class CreatePayRunService
     {
