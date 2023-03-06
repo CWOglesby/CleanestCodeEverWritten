@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using paylocity_payroll_api_test01.DataAccess;
 
 namespace paylocity_payroll_api_test01
 {
@@ -8,6 +10,9 @@ namespace paylocity_payroll_api_test01
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var payrollDbConnection = builder.Configuration["ConnectionStrings:PayrollDatabase"];
+            builder.Services.AddDbContext<PayrollDbContext>(options =>
+                options.UseSqlServer(payrollDbConnection));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
