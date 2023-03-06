@@ -16,6 +16,7 @@ namespace paylocity_payroll_api_test01
             builder.Services.AddDbContext<PayrollDbContext>(options =>
                 options.UseSqlServer(payrollDbConnection));
 
+            builder.Services.AddScoped<CreatePayRunService>();
             builder.Services.AddScoped<CalculatePayrollService>();
             builder.Services.AddScoped<PayRunRepository>();
 
